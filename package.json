@@ -1,0 +1,24 @@
+{
+  "name": "utimer",
+  "version": "1.0.0",
+  "description": "A simple react-express website showing random timers submitted by others in a 'simple' design",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "heroku-postbuild": "cd timer-ui/ && npm install --only=dev && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josuerojasrojas/Unknown-Timers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josuerojasrojas/Unknown-Timers/issues"
+  },
+  "homepage": "https://github.com/josuerojasrojas/Unknown-Timers#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
