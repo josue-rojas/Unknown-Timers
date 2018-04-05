@@ -47,12 +47,13 @@ export default class Menu extends Component {
       nav: {
         display: 'flex',
         width: '100vw',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        padding: '10px 25px'
+        padding: '20px 25px'
       },
       titles: {
-        textAlign: 'center'
+        textAlign: 'center',
+        marginRight: '30px',
       },
       title: {
         fontSize: '1.5rem',

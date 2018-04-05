@@ -8,20 +8,20 @@ export default class Background extends Component {
         width: '100vw',
         height: '100vh',
         zIndex: '-1',
-        position: 'absolute',
+        position: 'fixed',
       },
       background: {
         width: '100vw',
         height: '100vh',
         zIndex: '-2',
-        position: 'absolute',
+        position: 'fixed',
         backgroundImage: 'url(' + background_image + ')'
       },
       shade: {
         width: '100vw',
         height: '100vh',
-        zIndex: '-2',
-        position: 'absolute',
+        zIndex: '-1',
+        position: 'fixed',
         backgroundColor: 'rgba(33,31,33,0.82)',
       }
     }
