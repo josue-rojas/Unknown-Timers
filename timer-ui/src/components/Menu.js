@@ -66,7 +66,8 @@ export default class Menu extends Component {
         display: 'flex',
         transition: '400ms',
         // might make this part of a class in css
-        transform: this.props.isActive ? '' : 'translateY(-100%)'
+        transform: this.props.isActive ? '' : 'translateY(-100%)',
+        zIndex: '2',
       },
       link: {
         fontSize: '1.25rem',
@@ -84,9 +85,10 @@ export default class Menu extends Component {
           onClick={()=>this.props.menuClick(!this.props.isActive)}/>
         <div style={style.links} className='HamLinks'>
           <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#'>Home</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#'>Timers</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#'>About</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link}  href='https://github.com/josuerojasrojas/Dream-Defer-Timer'>Source</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#timers'>Timers</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#submit'>Submit</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#about'>About</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link}  href='https://github.com/josuerojasrojas/Unknown-Timers'>Source</a>
         </div>
       </div>
     )

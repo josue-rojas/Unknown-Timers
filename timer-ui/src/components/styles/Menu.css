@@ -34,7 +34,6 @@
     min-height: 0;
     padding: 0;
     flex-direction: row;
-    /* margin-left: auto; */
     width: auto;
     position: relative;
   }

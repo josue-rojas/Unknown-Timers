@@ -1,0 +1,15 @@
+.BigBox {
+  max-width: 95%;
+}
+
+@media (min-width: 768px) {
+    .BigBox {
+        max-width: 85%;
+    }
+}
+
+@media (min-width: 995px) {
+    .BigBox {
+        max-width: 65%;
+    }
+}
