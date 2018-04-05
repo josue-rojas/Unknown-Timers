@@ -72,6 +72,8 @@ export default class Menu extends Component {
       link: {
         fontSize: '1.25rem',
         transition: '400ms',
+        justifyContent: 'center',
+        alignItems: 'center',
       }
     }
     return(
