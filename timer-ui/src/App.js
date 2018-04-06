@@ -55,6 +55,9 @@ export default class App extends Component {
     const style = {
       viewWrapper: {
         opacity: this.state.menuActive ? '0' : '1',
+        // making the view fixed will stop it from scrolling (cause view ui is invisible)
+        position: this.state.menuActive ? 'fixed' : '',
+        width: '100%',
         transition: '400ms',
       }
     }

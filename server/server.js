@@ -2,20 +2,28 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const app = express();
+const parser = require('body-parser');
+app.use(parser.json());
+const { Pool, Client } = require('pg');
+var connectionString = process.env.DATABASE_URL;
+const pool = new Pool({
+  connectionString: connectionString,
+});
+
+pool.query("CREATE TABLE IF NOT EXISTS utimers(id SERIAL UNIQUE PRIMARY KEY, expiration TIMESTAMP, color VARCHAR(8), name VARCHAR(255))")
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../timer-ui/build')));
 
-// Answer API requests.
-app.get('/api', function (req, res) {
-  res.set('Content-Type', 'application/json');
-  res.send('{"message":"Hello from the custom server!"}');
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../timer-ui/build', 'index.html'));
 });
 
-// All remaining requests return the React app, so it can handle routing.
-app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../timer-ui/build', 'index.html'));
-});
+app.post('/timer', (req, res)=>{
+  pool.query('INSERT INTO utimers(id, expiration, color, name) values(DEFAULT, $1, $2, $3)', [req.body.expiration, req.body.color, req.body.name])
+  .then(()=> res.status(200).send({success : "Updated Successfully"}))
+  .catch(()=> res.status(500).send({ error: 'Something failed!' }))
+})
 
 app.listen(PORT, function () {
   console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
