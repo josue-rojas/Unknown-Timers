@@ -40,7 +40,6 @@ export default class TimersView extends Component {
       // timesLeft holds milliseconds left for i timer
       timesLeft: [],
       data: {},
-      // timersBoxes: ,
     }
     this.makeTimerBoxes = this.makeTimerBoxes.bind(this);
     this.timersChange = this.timersChange.bind(this);
@@ -64,8 +63,8 @@ export default class TimersView extends Component {
         data: data,
         timesLeft: timesLeft,
       })
+      this.timer = setInterval(this.timersChange, 1000);
     })
-    this.timer = setInterval(this.timersChange, 1000);
   }
 
   componentWillUnmount(){
@@ -73,6 +72,10 @@ export default class TimersView extends Component {
   }
 
   timersChange(){
+    if(this.state.data.length === 0) {
+      clearInterval(this.timer);
+      return
+    }
     const timesLeft = [];
     const data = this.state.data.slice();
     let removed = 0;
