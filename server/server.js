@@ -15,7 +15,7 @@ pool.query("CREATE TABLE IF NOT EXISTS utimers(id SERIAL UNIQUE PRIMARY KEY, exp
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../timer-ui/build')));
 
-app.get('/timers', (req, res) => {
+app.get('/gettimers', (req, res) => {
   pool.query('SELECT * FROM utimers where expiration > now() ORDER BY expiration')
   .then(results => {
     res.end(JSON.stringify(results.rows))

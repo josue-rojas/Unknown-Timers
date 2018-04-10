@@ -47,7 +47,7 @@ export default class TimersView extends Component {
   }
   componentDidMount() {
     document.title = 'Unknown Timers';
-    fetch('/timers')
+    fetch('/gettimers')
     .then((res)=>{return res.json()})
     .then((data)=>{
       const timesLeft = []
