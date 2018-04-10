@@ -9,7 +9,7 @@ class Hamburger extends Component {
         height: '32px',
         position: 'relative',
         cursor: 'pointer',
-        zIndex: '3'
+        zIndex: '30'
       },
       lines: {
         width: '100%',
@@ -67,7 +67,7 @@ export default class Menu extends Component {
         transition: '400ms',
         // might make this part of a class in css
         transform: this.props.isActive ? '' : 'translateY(-100%)',
-        zIndex: '2',
+        zIndex: '20',
       },
       link: {
         fontSize: '1.25rem',
@@ -86,10 +86,10 @@ export default class Menu extends Component {
           active={this.props.isActive}
           onClick={()=>this.props.menuClick(!this.props.isActive)}/>
         <div style={style.links} className='HamLinks'>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#'>Home</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#timers'>Timers</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#submit'>Submit</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='#about'>About</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/'>Home</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/timers'>Timers</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/submit'>Submit</a>
+          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/about'>About</a>
           <a onClick={()=>this.props.menuClick(false)} style={style.link}  href='https://github.com/josuerojasrojas/Unknown-Timers'>Source</a>
         </div>
       </div>

@@ -10,10 +10,18 @@ const pool = new Pool({
   connectionString: connectionString,
 });
 
-pool.query("CREATE TABLE IF NOT EXISTS utimers(id SERIAL UNIQUE PRIMARY KEY, expiration TIMESTAMP, color VARCHAR(8), name VARCHAR(255))")
+pool.query("CREATE TABLE IF NOT EXISTS utimers(id SERIAL UNIQUE PRIMARY KEY, expiration timestamptz, color VARCHAR(8), name VARCHAR(255))")
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../timer-ui/build')));
+
+app.get('/timers', (req, res) => {
+  pool.query('SELECT * FROM utimers where expiration > now() ORDER BY expiration')
+  .then(results => {
+    res.end(JSON.stringify(results.rows))
+  })
+  .catch(e => console.error(e.stack))
+})
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../timer-ui/build', 'index.html'));

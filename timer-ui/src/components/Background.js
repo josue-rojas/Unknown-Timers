@@ -9,6 +9,8 @@ export default class Background extends Component {
         height: '100vh',
         zIndex: '-1',
         position: 'fixed',
+        filter: this.props.isActive ? 'blur(5px)' : '',
+        transition: '400ms',
       },
       background: {
         width: '100vw',

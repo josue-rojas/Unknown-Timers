@@ -15,34 +15,19 @@ export default class App extends Component {
     super(props);
     // this should match to the links in the nav.... maybe just pass this as a prop..........TODO: pass this as a prop so it can be handled when changing links, might need titles
     this.views = {
-      '#': true,
-      '#timers': true,
-      '#submit': true,
-      '#about': true,
-      '#success': true,
-      '#failed': true,
+      '/': true,
+      '/timers': true,
+      '/submit': true,
+      '/about': true,
+      '/success': true,
+      '/failed': true,
     }
     this.state = {
       menuActive: false,
-      activeView: this.views[window.location.hash] ? window.location.hash : '#',
+      activeView: this.views[window.location.pathname] ? window.location.pathname : '/',
     }
-    this.changeWindow = this.changeWindow.bind(this);
     this.menuClick = this.menuClick.bind(this);
     this.getView = this.getView.bind(this);
-  }
-
-  componentDidMount(){
-    window.addEventListener("hashchange", this.changeWindow, false);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("hashchange", this.changeWindow, false);
-  }
-
-  changeWindow(h){
-    this.setState({
-      activeView: this.views[window.location.hash] ? window.location.hash : '#',
-    })
   }
 
   menuClick(isActive) {
@@ -62,12 +47,12 @@ export default class App extends Component {
       }
     }
     const view = {
-      '#': (<HomeView/>),
-      '#timers': (<TimersView/>),
-      '#submit': (<SubmitView/>),
-      '#about': (<AboutView/>),
-      '#success': (<SuccessView/>),
-      '#failed': (<FailedView/>),
+      '/': (<HomeView/>),
+      '/timers': (<TimersView/>),
+      '/submit': (<SubmitView/>),
+      '/about': (<AboutView/>),
+      '/success': (<SuccessView/>),
+      '/failed': (<FailedView/>),
     }[activeView];
     return(
       <div style={style.viewWrapper}>
@@ -79,7 +64,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <Background/>
+        <Background
+          isActive={this.state.menuActive}/>
         <Menu
           isActive={this.state.menuActive}
           menuClick={this.menuClick}/>

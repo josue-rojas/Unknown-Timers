@@ -32,10 +32,12 @@ export default class SubmitView extends Component {
   }
 
   submitform() {
+    const hour = this.state.time._d.getHours();
+    const min = this.state.time._d.getMinutes();
+    const sec = this.state.time._d.getSeconds();
     const data = {
       name: this.state.name,
-      // need to change to have time
-      expiration: this.state.date,
+      expiration: new Date(this.state.date._d.setHours(hour, min, sec)),
       color: this.state.color,
     }
     fetch('/timer', {
@@ -44,13 +46,13 @@ export default class SubmitView extends Component {
       headers: new Headers({'Content-Type': 'application/json'})
     })
     .then(res => res.json())
-    .catch(error => console.error('Error:', error))
+    .catch(error => window.location = '/failed')
     .then(response => {
       if(['error'] in response){
-        window.location = '#failed'
+        window.location = '/failed';
         return
       }
-      window.location = '#success'
+      window.location = '/success';
     });
   }
 
@@ -63,12 +65,17 @@ export default class SubmitView extends Component {
       formBox: {
         backgroundColor: 'rgba(0,0,0,0.4)',
         borderRadius: '5px',
-        padding: '25px',
+        padding: '25px 50px 20px',
         margin: 'auto',
       },
       title: {
         textAlign: 'center',
         fontSize: '1.25rem',
+      },
+      line: {
+        width: '75%',
+        borderTop: '1px solid rgb(209, 209, 209)',
+        margin: 'auto',
         marginBottom: '10px',
       },
       form: {
@@ -99,6 +106,7 @@ export default class SubmitView extends Component {
       <div style={style.wrapper}>
         <div style={style.formBox} className='FormBox'>
           <div style={style.title}>Submit A New Timer</div>
+          <div style={style.line}/>
           <div style={style.form}>
             <div style={style.label}>Name</div>
             <input
@@ -118,10 +126,10 @@ export default class SubmitView extends Component {
             <DatePicker
               showTimeSelect
               showTimeSelectOnly
-              timeIntervals={15}
+              timeIntervals={30}
               dateFormat="LT"
               timeCaption="Time"
-              selected={this.state.date}
+              selected={this.state.time}
               onChange={(date)=>{
                 const e = {target:{value:date}};
                 this.onChangeInput(e, 'time');
