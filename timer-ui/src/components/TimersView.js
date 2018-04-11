@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
+import './styles/TimersView.css'
 
 class TimerBox extends Component {
+  handleClick() {
+    // TODO make another page to handle click to show single timer
+    window.location = '#'+ this.props.id
+  }
   render() {
     const style = {
       box: {
-        width: '100px',
-        height: '100px',
-        border: '1px solid white',
+        minHeight: '100px',
+        padding: '15px 5px',
+        border: '1px solid rgb(209, 209, 209)',
         position: 'relative',
-        zIndex: '3'
+        zIndex: '3',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        float: 'left',
+        textAlign: 'center',
+        cursor: 'pointer',
       },
       backgroundcolor: {
         position: 'absolute',
@@ -19,15 +30,41 @@ class TimerBox extends Component {
         top: '0',
         left: '0',
         zIndex: '-1',
+      },
+      shade: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgb(0,0,0)',
+        zIndex: '-1',
+        top: '0',
+        left: '0',
+        transition: '400ms'
       }
     }
+    // TODO remove the division by having if statements?!?!?
+    let total = this.props.expiration;
+    const days = Math.trunc(total / 86400);
+    const dayDiv = days > 0 ? (<div>{days} Days</div>) : ''
+    total = total - (days*86400)
+    const hours = Math.trunc(total / 3600)
+    const hoursDiv = hours > 0 ? (<div>{hours} Hours</div>) : ''
+    total = total - (hours * 3600)
+    const minutes = Math.trunc(total / 60)
+    const minDiv = minutes > 0 ? (<div>{minutes} Minutes</div>) : ''
+    const seconds = Math.trunc(total - (minutes * 60))
+    // const secDiv = seconds > 0 ? (<div>{hours} Hours</div>) : ''
     return(
-      <div style={style.box}>
+      <div style={style.box} className='TimerBox' onClick={this.handleClick.bind(this)}>
         <div>
-          {this.props.name}
-          {this.props.expiration}
+          <div>{this.props.name}</div>
+          {dayDiv}
+          {hoursDiv}
+          {minDiv}
+          <div>{seconds} Sec</div>
         </div>
         <div style={style.backgroundcolor}/>
+        <div style={style.shade} className='shade'/>
       </div>
     )
   }
@@ -52,7 +89,7 @@ export default class TimersView extends Component {
       const timesLeft = []
       const now = new Date().valueOf();
       for(let i = 0; i < data.length; i++){
-        timesLeft.push(parseInt(((new Date(data[i].expiration).valueOf() - now)/1000)))
+        timesLeft.push(parseInt(((new Date(data[i].expiration).valueOf() - now)/1000),10))
       }
       // dummy data
       // timesLeft.splice(0,0,2);
@@ -99,6 +136,7 @@ export default class TimersView extends Component {
     for(let i = 0; i < data.length; i++){
       timersBoxes.push(
         <TimerBox
+          key={data[i].id+'timerbox'}
           color={data[i].color}
           expiration={timesLeft[i]}
           name={data[i].name}
@@ -113,10 +151,12 @@ export default class TimersView extends Component {
       wrapper: {
         display: 'flex',
         flexWrap: 'wrap',
+        // padding: '10px',
+        // justifyContent: 'center',
       }
     }
     return(
-      <div style={style.wrapper}>
+      <div style={style.wrapper} className='TimersViewWrapper'>
         {this.makeTimerBoxes(this.state.timesLeft, this.state.data)}
       </div>
     )

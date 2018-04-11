@@ -35,6 +35,12 @@
   background-color: rgba(5, 251, 255, 0.01);
 }
 
+@media (min-width: 768px) {
+  .HamLinks a{
+    width: 100%;
+  }
+}
+
 @media (min-width: 992px){
   .Hamburger {
     display: none;

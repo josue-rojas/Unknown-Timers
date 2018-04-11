@@ -1,0 +1,32 @@
+.TimersViewWrapper {
+  padding: 10px;
+}
+
+.TimerBox {
+  width: 50%;
+}
+
+.TimerBox .shade {
+  opacity: .3;
+}
+.TimerBox:hover .shade {
+  opacity: .0;
+}
+
+
+@media (min-width: 768px) {
+  .TimerBox {
+    width: 33.333%;
+    margin: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .TimersViewWrapper {
+    padding: 10px 10%;
+  }
+
+  .TimerBox {
+    width: 25%;
+  }
+}
