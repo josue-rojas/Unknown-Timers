@@ -14,7 +14,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     // this should match to the links in the nav.... maybe just pass this as a prop..........TODO: pass this as a prop so it can be handled when changing links, might need titles
-    this.views = {
+    this.VIEWS = {
       '/': true,
       '/timers': true,
       '/submit': true,
@@ -24,7 +24,7 @@ export default class App extends Component {
     }
     this.state = {
       menuActive: false,
-      activeView: this.views[window.location.pathname] ? window.location.pathname : '/',
+      activeView: this.VIEWS[window.location.pathname] ? window.location.pathname : '/',
     }
     this.menuClick = this.menuClick.bind(this);
     this.getView = this.getView.bind(this);
@@ -68,7 +68,8 @@ export default class App extends Component {
           isActive={this.state.menuActive}/>
         <Menu
           isActive={this.state.menuActive}
-          menuClick={this.menuClick}/>
+          menuClick={this.menuClick}
+          activeView={this.state.activeView}/>
         {this.getView(this.state.activeView)}
       </div>
     );

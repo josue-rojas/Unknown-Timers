@@ -42,7 +42,6 @@ class Hamburger extends Component {
 
 export default class Menu extends Component {
   render() {
-    const active_link = '';
     const style = {
       nav: {
         display: 'flex',
@@ -86,11 +85,29 @@ export default class Menu extends Component {
           active={this.props.isActive}
           onClick={()=>this.props.menuClick(!this.props.isActive)}/>
         <div style={style.links} className='HamLinks'>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/'>Home</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/timers'>Timers</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/submit'>Submit</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link} href='/about'>About</a>
-          <a onClick={()=>this.props.menuClick(false)} style={style.link}  href='https://github.com/josuerojasrojas/Unknown-Timers'>Source</a>
+          <a
+            className={this.props.activeView === '/' ? 'active': ''}
+            onClick={()=>this.props.menuClick(false)}
+            style={style.link}
+            href='/'>Home</a>
+          <a
+            className={this.props.activeView === '/timers' ? 'active': ''}
+            onClick={()=>this.props.menuClick(false)}
+            style={style.link} href='/timers'>Timers</a>
+          <a
+            className={this.props.activeView === '/submit' ? 'active': ''}
+            onClick={()=>this.props.menuClick(false)}
+            style={style.link}
+            href='/submit'>Submit</a>
+          <a
+            className={this.props.activeView === '/about' ? 'active': ''}
+            onClick={()=>this.props.menuClick(false)}
+            style={style.link}
+            href='/about'>About</a>
+          <a
+            onClick={()=>this.props.menuClick(false)}
+            style={style.link}
+            href='https://github.com/josuerojasrojas/Unknown-Timers'>Source</a>
         </div>
       </div>
     )

@@ -86,12 +86,12 @@ export default class TimersView extends Component {
     fetch('/gettimers')
     .then((res)=>{return res.json()})
     .then((data)=>{
-      const timesLeft = []
+      const timesLeft = [];
       const now = new Date().valueOf();
       for(let i = 0; i < data.length; i++){
-        timesLeft.push(parseInt(((new Date(data[i].expiration).valueOf() - now)/1000),10))
+        timesLeft.push(parseInt(((new Date(data[i].expiration).valueOf() - now)/1000),10));
       }
-      // dummy data
+      // dummy data for testing quick expiration
       // timesLeft.splice(0,0,2);
       // data.splice(0, 0, {name: '', expiration: '', color: 'yellow'});
       // timesLeft.splice(0,0,2);
@@ -109,7 +109,7 @@ export default class TimersView extends Component {
   }
 
   timersChange(){
-    if(this.state.data.length === 0) {
+    if(this.state.timesLeft.length === 0) {
       clearInterval(this.timer);
       return
     }
@@ -119,16 +119,16 @@ export default class TimersView extends Component {
     for(let i = 0; i < this.state.timesLeft.length; i++){
       const time = this.state.timesLeft[i]-1;
       if(time < 1){
-        data.splice(i-(removed--), 1)
+        data.splice(i-(removed--), 1);
       }
       else{
-        timesLeft.push(time)
+        timesLeft.push(time);
       }
     }
     this.setState({
       timesLeft: timesLeft,
       data: data
-    })
+    });
   }
 
   makeTimerBoxes(timesLeft, data){
