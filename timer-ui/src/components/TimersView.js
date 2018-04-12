@@ -58,10 +58,10 @@ class TimerBox extends Component {
       <div style={style.box} className='TimerBox' onClick={this.handleClick.bind(this)}>
         <div>
           <div>{this.props.name}</div>
-          {dayDiv}
-          {hoursDiv}
-          {minDiv}
           <div>{seconds} Sec</div>
+          {minDiv}
+          {hoursDiv}
+          {dayDiv}
         </div>
         <div style={style.backgroundcolor}/>
         <div style={style.shade} className='shade'/>

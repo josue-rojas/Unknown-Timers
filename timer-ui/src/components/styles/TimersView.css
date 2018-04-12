@@ -7,10 +7,10 @@
 }
 
 .TimerBox .shade {
-  opacity: .3;
+  opacity: .4;
 }
 .TimerBox:hover .shade {
-  opacity: .0;
+  opacity: .1;
 }
 
 
