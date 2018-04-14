@@ -1,0 +1,40 @@
+.timerWrapper {
+  flex-direction: column;
+  min-height: 40vh;
+  align-items: center;
+}
+
+.timerWrapper .timer-title {
+  font-size: 2rem;
+}
+
+.timerWrapper div{
+  text-align: center;
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.timerWrapper div div {
+  margin-left: 10px;
+}
+
+
+@media (min-width: 768px) {
+  .timerWrapper {
+    flex-direction: row;
+  }
+  .timerWrapper .timer-title {
+    font-size: 2.5rem;
+  }
+  .timerWrapper div{
+    font-size: 3.5rem;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .timerWrapper div div {
+    margin-left: 0;
+    margin-top: -5px;
+  }
+}

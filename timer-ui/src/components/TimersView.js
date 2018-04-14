@@ -45,20 +45,20 @@ class TimerBox extends Component {
     // TODO remove the division by having if statements?!?!?
     let total = this.props.expiration;
     const days = Math.trunc(total / 86400);
-    const dayDiv = days > 0 ? (<div>{days} Days</div>) : ''
-    total = total - (days*86400)
-    const hours = Math.trunc(total / 3600)
-    const hoursDiv = hours > 0 ? (<div>{hours} Hours</div>) : ''
-    total = total - (hours * 3600)
-    const minutes = Math.trunc(total / 60)
-    const minDiv = minutes > 0 ? (<div>{minutes} Minutes</div>) : ''
-    const seconds = Math.trunc(total - (minutes * 60))
+    const dayDiv = days > 0 ? (<div>{days} days</div>) : '';
+    total = total - (days*86400);
+    const hours = Math.trunc(total / 3600);
+    const hoursDiv = hours > 0 ? (<div>{hours} hrs</div>) : '';
+    total = total - (hours * 3600);
+    const minutes = Math.trunc(total / 60);
+    const minDiv = minutes > 0 ? (<div>{minutes} mins</div>) : '';
+    const seconds = Math.trunc(total - (minutes * 60));
     // const secDiv = seconds > 0 ? (<div>{hours} Hours</div>) : ''
     return(
       <div style={style.box} className='TimerBox' onClick={this.handleClick.bind(this)}>
         <div>
           <div>{this.props.name}</div>
-          <div>{seconds} Sec</div>
+          <div>{seconds} secs</div>
           {minDiv}
           {hoursDiv}
           {dayDiv}
