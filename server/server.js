@@ -15,6 +15,16 @@ pool.query('CREATE TABLE IF NOT EXISTS utimers(id SERIAL UNIQUE PRIMARY KEY, exp
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../timer-ui/build')));
 
+// get single timer via id query
+app.get('/gettimer', (req, res) => {
+  pool.query(`SELECT * FROM utimers where id=${req.query.id}`)
+  .then(results => {
+    res.end(JSON.stringify(results.rows))
+  })
+  .catch(e => console.error(e.stack))
+})
+
+// get n timers
 app.get('/gettimers', (req, res) => {
   const numTimers =  req.query.num ? `LIMIT ${req.query.num}` : '';
   pool.query(`SELECT * FROM utimers where expiration > now() ORDER BY expiration ${numTimers}`)

@@ -3,6 +3,7 @@ import Background from './components/Background';
 import Menu from './components/Menu';
 import HomeView from './components/HomeView';
 import TimersView from './components/TimersView';
+import SingleTimerView from './components/SingleTimerView';
 import SubmitView from './components/SubmitView';
 import AboutView from './components/AboutView';
 import SuccessView from './components/SuccessView';
@@ -17,6 +18,7 @@ export default class App extends Component {
     this.VIEWS = {
       '/': true,
       '/timers': true,
+      '/timer': true,
       '/submit': true,
       '/about': true,
       '/success': true,
@@ -49,6 +51,7 @@ export default class App extends Component {
     const view = {
       '/': (<HomeView/>),
       '/timers': (<TimersView/>),
+      '/timer': (<SingleTimerView/>),
       '/submit': (<SubmitView/>),
       '/about': (<AboutView/>),
       '/success': (<SuccessView/>),

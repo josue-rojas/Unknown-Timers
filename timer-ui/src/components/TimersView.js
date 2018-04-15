@@ -4,7 +4,7 @@ import './styles/TimersView.css'
 class TimerBox extends Component {
   handleClick() {
     // TODO make another page to handle click to show single timer
-    window.location = '#'+ this.props.id
+    window.location = `/timer#${this.props.id}`
   }
   render() {
     const style = {
