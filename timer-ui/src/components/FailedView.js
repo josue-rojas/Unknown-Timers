@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BigBox from './BigBox';
-
+// TODO: finish
 export default class FailedView extends Component {
   constructor(props){
     super(props);
