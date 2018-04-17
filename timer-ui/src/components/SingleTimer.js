@@ -13,6 +13,8 @@ export default class SingleTimer extends Component {
     const minutes = Math.trunc(secs / 60);
     const minDiv = minutes > 0 ? (<div>{minutes}<div>mins</div></div>) : '';
     const seconds = Math.trunc(secs - (minutes * 60));
+    const secDiv = seconds > -1 ? (<div>{seconds}<div>secs</div></div>) : '';
+    const title = seconds > -1 ? (this.props.title ? this.props.title : 'This Timer Ending') : 'This Timer Has Ended';
     const style = {
       timerWrapper: {
         display: 'flex',
@@ -26,8 +28,8 @@ export default class SingleTimer extends Component {
     }
     return(
       <div style={style.timerWrapper} className='timerWrapper'>
-        <div style={style.title} className='timer-title'>{this.props.title ? this.props.title : 'This Timer Ending'}</div>
-        <div>{seconds}<div>secs</div></div>
+        <div style={style.title} className='timer-title'>{title}</div>
+        {secDiv}
         {minDiv}
         {hoursDiv}
         {dayDiv}

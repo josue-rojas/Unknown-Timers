@@ -14,8 +14,15 @@ html {
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent; }
 
-a, a:hover {
-  text-decoration: none; }
+a {
+  text-decoration: none;
+  color: rgb(161, 161, 161);
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgb(115, 115, 115);
+}
 
 *,
 *::before,

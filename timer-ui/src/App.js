@@ -9,8 +9,6 @@ import AboutView from './components/AboutView';
 import SuccessView from './components/SuccessView';
 import FailedView from './components/FailedView';
 
-
-
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -46,6 +44,22 @@ export default class App extends Component {
         position: this.state.menuActive ? 'fixed' : '',
         width: '100%',
         transition: '400ms',
+        display: 'flex',
+        flexWrap: 'wrap',
+        minHeight: 'calc(100vh - 110px)',
+        flexDirection: 'column',
+      },
+      view: {
+        display: 'table',
+        width: '100%',
+        marginBottom: 'auto',
+      },
+      footer: {
+        display: 'flex',
+        width: '100%',
+        justifyContent: 'center',
+        margin: '20px 0 10px',
+        fontSize: '.85rem'
       }
     }
     const view = {
@@ -59,7 +73,8 @@ export default class App extends Component {
     }[activeView];
     return(
       <div style={style.viewWrapper}>
-        {view}
+        <div style={style.view}>{view}</div>
+        <div style={style.footer}>Create by<a href='http://josuerojasrojas.github.io'>&nbsp;Josue Rojas</a></div>
       </div>
     )
   }
@@ -73,7 +88,7 @@ export default class App extends Component {
           isActive={this.state.menuActive}
           menuClick={this.menuClick}
           activeView={this.state.activeView}/>
-        {this.getView(this.state.activeView)}
+        <div>{this.getView(this.state.activeView)}</div>
       </div>
     );
   }

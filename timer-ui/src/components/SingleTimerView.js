@@ -5,23 +5,23 @@ export default class SingleTimerView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: {},
+      data: [{name: ''}],
       time: 0,
+      ended: false,
     }
     this.timerChange = this.timerChange.bind(this);
   }
 
   componentDidMount() {
-    // document.title = 'Unknown Timers';
     const id = window.location.hash.substring(1);
     fetch(`/gettimer?&id=${id}`)
     .then((res)=>{return res.json()})
     .then((data)=>{
-      const timesLeft = [];
       const now = new Date().valueOf();
       let time = 0;
       if(data){
-        time = parseInt(((new Date(data[0].expiration).valueOf() - now)/1000),10)
+        time = parseInt(((new Date(data[0].expiration).valueOf() - now)/1000),10);
+        document.title = data[0].name === '' ? 'Timer' : `${data[0].name}'s Timer`;
       }
       this.setState({
         time: time,
@@ -38,13 +38,11 @@ export default class SingleTimerView extends Component {
   timerChange() {
     // TODO handle expire timers better; maybe show a message
     if(this.state.time < 1) {
-      clearInterval(this.timer);
-      window.location = '/';
+      // TODO add check 'out other timers if ended'
+      this.setState({ ended: true })
       return
     }
-    this.setState({
-      time: this.state.time-1,
-    })
+    this.setState({ time: this.state.time-1 })
   }
 
 
@@ -52,7 +50,7 @@ export default class SingleTimerView extends Component {
     return(
       <div>
         <SingleTimer
-          title={this.state.data.name}
+          title={this.state.data[0].name==='' ? false :  `${this.state.data[0].name}'s Timer`}
           secs={this.state.time}/>
       </div>
     )

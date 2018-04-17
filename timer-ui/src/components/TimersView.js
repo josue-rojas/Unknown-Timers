@@ -151,8 +151,6 @@ export default class TimersView extends Component {
       wrapper: {
         display: 'flex',
         flexWrap: 'wrap',
-        // padding: '10px',
-        // justifyContent: 'center',
       }
     }
     return(
