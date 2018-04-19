@@ -6,8 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import './styles/SubmitView.css'
 
-// TODO: error check for inputs
-
 export default class SubmitView extends Component {
   constructor(props) {
     super(props);
@@ -16,9 +14,33 @@ export default class SubmitView extends Component {
       date: moment(),
       time: moment(),
       color: '#345678',
+      inputCheck: {
+        name: true,
+        date: true,
+        time: true,
+        color: true,
+      },
     }
     this.onChangeInput = this.onChangeInput.bind(this);
     this.submitform = this.submitform.bind(this);
+    // functions to check inputs
+    this.checker = {
+      name: (v) => { return true },
+      date: (v) => { return moment().isSameOrBefore(v, 'day')},
+      time: (v) => {
+        if(moment().isSame(this.state.date, 'day')){
+          const test = moment().set({
+            'hour': v.hours(),
+            'minute': v.minutes(),
+          })
+          return moment().isBefore(test);
+        }
+        return moment().isBefore(this.state.date);
+      },
+      // https://stackoverflow.com/questions/8027423/how-to-check-if-a-string-is-a-valid-hex-color-representation
+      // might not need since the color kind of make sure it is correct.
+      color: (v) => { return  /^#[0-9A-F]{6}$/i.test(v) },
+    }
   }
 
   componentDidMount() {
@@ -28,10 +50,27 @@ export default class SubmitView extends Component {
   //dynamic onchange for every input
   // https://stackoverflow.com/questions/29280445/reactjs-setstate-with-a-dynamic-key-name
   onChangeInput(e, statekey) {
-    this.setState({[statekey]: e.target.value})
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+    let inputCheck = {...this.state.inputCheck};
+    inputCheck[statekey] = this.checker[statekey](e.target.value);
+    this.setState({
+      [statekey]: e.target.value,
+      inputCheck: inputCheck,
+    })
   }
 
   submitform() {
+    // last check
+    let hasError = 0;
+    const inputCheck = {};
+    for(let key in this.state.inputCheck) {
+      inputCheck[key] = this.checker[key](this.state[key]);
+      hasError += inputCheck[key] ? 0 : 1;
+    }
+    this.setState({ inputCheck: inputCheck });
+    if (hasError > 0){
+      return false;
+    }
     const hour = this.state.time._d.getHours();
     const min = this.state.time._d.getMinutes();
     const sec = this.state.time._d.getSeconds();
@@ -114,14 +153,16 @@ export default class SubmitView extends Component {
               value={this.state.name}
               onChange={(e) => this.onChangeInput(e, 'name')}
               type='text'
-              placeholder='Name of timer'/>
+              placeholder='Name of timer'
+              className={this.state.inputCheck.name ? 'check' : 'error'}/>
             <div style={style.label}>Date</div>
             <DatePicker
               selected={this.state.date}
               onChange={(date)=>{
                 const e = {target:{value:date}};
                 this.onChangeInput(e, 'date');
-              }}/>
+              }}
+              className={this.state.inputCheck.date ? 'check' : 'error'}/>
             <div style={style.label}>Time</div>
             <DatePicker
               showTimeSelect
@@ -133,7 +174,8 @@ export default class SubmitView extends Component {
               onChange={(date)=>{
                 const e = {target:{value:date}};
                 this.onChangeInput(e, 'time');
-              }}/>
+              }}
+              className={this.state.inputCheck.time ? 'check' : 'error'}/>
             <div style={style.label}>Color</div>
              <ColorPicker
               color={this.state.color}
@@ -142,7 +184,8 @@ export default class SubmitView extends Component {
                 const e = {target:{value:color.color}};
                 this.onChangeInput(e, 'color');
               }}
-              placement="topRight"/>
+              placement="topRight"
+              className={this.state.inputCheck.color ? 'check' : 'error'}/>
             <div style={style.button} className='form-button' onClick={this.submitform}>Submit</div>
           </div>
         </div>

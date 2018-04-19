@@ -13,6 +13,11 @@
   background-color: rgba(5, 251, 255, 0.01);
 }
 
+.error {
+  background-color: #ff9589;
+  border: 1px solid #ff3d3b !important;
+}
+
 /* color box */
 .rc-color-picker-wrap span{
   width: 100%;
@@ -56,3 +61,5 @@
         max-width: 65%;
     }
 }
+
+/* TODO add shake for when submit has error */
