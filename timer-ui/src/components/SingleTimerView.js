@@ -19,10 +19,14 @@ export default class SingleTimerView extends Component {
     .then((data)=>{
       const now = new Date().valueOf();
       let time = 0;
-      if(data){
-        time = parseInt(((new Date(data[0].expiration).valueOf() - now)/1000),10);
-        document.title = data[0].name === '' ? 'Timer' : `${data[0].name}'s Timer`;
+      if(data.length === 0) {
+        // prevent error if it does not exist
+        window.location = '/';
+        return;
       }
+      time = parseInt(((new Date(data[0].expiration).valueOf() - now)/1000),10);
+      document.title = data[0].name === '' ? 'Timer' : `${data[0].name}'s Timer`;
+
       this.setState({
         time: time,
         data: data,
@@ -36,21 +40,19 @@ export default class SingleTimerView extends Component {
   }
 
   timerChange() {
-    // TODO handle expire timers better; maybe show a message
     if(this.state.time < 1) {
-      // TODO add check 'out other timers if ended'
+      clearInterval(this.timer);
       this.setState({ ended: true })
       return
     }
     this.setState({ time: this.state.time-1 })
   }
 
-
   render() {
     return(
       <div>
         <SingleTimer
-          title={this.state.data[0].name==='' ? false :  `${this.state.data[0].name}'s Timer`}
+          title={this.state.data[0].name === '' ? false :  `${this.state.data[0].name}'s Timer`}
           secs={this.state.time}/>
       </div>
     )
