@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BigBox from './BigBox';
-// TODO: finish
+
 export default class FailedView extends Component {
   constructor(props){
     super(props);
@@ -40,9 +40,9 @@ export default class FailedView extends Component {
       <div>
         <BigBox>
           <div style={style.title}>Failed</div>
-          :( Something went wrong
+          :( Something went wrong. Usually this could have happen cause of a connection to the database server, or the input was somehow wrong. Anyway try again later.
           <br/>
-          Will redirect to <a href='/'>/timers</a> in {this.state.redirecttime}
+          You will now be redirect to <a href='/'>/timers</a> in {this.state.redirecttime}
         </BigBox>
       </div>
     )

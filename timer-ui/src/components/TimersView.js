@@ -3,7 +3,6 @@ import './styles/TimersView.css'
 
 class TimerBox extends Component {
   handleClick() {
-    // TODO make another page to handle click to show single timer
     window.location = `/timer#${this.props.id}`
   }
   render() {
@@ -53,12 +52,12 @@ class TimerBox extends Component {
     const minutes = Math.trunc(total / 60);
     const minDiv = minutes > 0 ? (<div>{minutes} mins</div>) : '';
     const seconds = Math.trunc(total - (minutes * 60));
-    // const secDiv = seconds > 0 ? (<div>{hours} Hours</div>) : ''
+    const secDiv = (<div>{seconds} secs</div>);
     return(
       <div style={style.box} className='TimerBox' onClick={this.handleClick.bind(this)}>
         <div>
           <div>{this.props.name}</div>
-          <div>{seconds} secs</div>
+          {secDiv}
           {minDiv}
           {hoursDiv}
           {dayDiv}

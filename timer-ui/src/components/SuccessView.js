@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import BigBox from './BigBox';
-// TODO finish
+
 export default class SuccessView extends Component {
   constructor(props){
     super(props);
@@ -40,9 +40,9 @@ export default class SuccessView extends Component {
       <div>
         <BigBox>
           <div style={style.title}>Success</div>
-          Thank you for your submission!
+          Thank you for your submission! You're new timer will appear soon.
           <br/>
-          Will redirect to <a href='/timers'>/timers</a> in {this.state.redirecttime}
+          You will now be redirect to <a href='/timers'>/timers</a> in {this.state.redirecttime}, or just click the link to not wait.
         </BigBox>
       </div>
     )

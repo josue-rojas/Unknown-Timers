@@ -25,7 +25,7 @@ export default class AboutView extends Component {
           </p>
           <div style={style.title}>Boring Stuff</div>
           <p>
-            In this project I wanted to show off a few things. The first is the UI. From the menu to the tile <a href='/timers'>timers</a>, I tried to be as simple as possible but also to the point where it looks clean and clear. Next is using react. Although I have done other projects using react, this is the first project that handles routes and dynamic pages. In the backend I am using express for api calls and routes and postgresSQL for the database. I have used both of these but not with react. The challenge here was figuring how to go about routing the page. I guess the next challenges here is thinking more like a designer and fixing little stylings things.
+            In this project I wanted to show off a few things. The first is the UI. From the menu to the tile <a href='/timers'>timers</a>, I tried to make it as simple as possible to the point where it looks clean and clear. Next is using react. Although I have done other projects using react, this is the first project that handles routes and dynamic pages. In the backend I am using express for api calls and routes and postgresSQL for the database. I have used both of these but not with react. The challenge here was figuring how to go about routing the page. I guess the next challenges here is thinking more like a designer and fixing little stylings things.
           </p>
         </BigBox>
       </div>
