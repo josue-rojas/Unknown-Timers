@@ -17,13 +17,13 @@ export default class SingleTimerView extends Component {
     fetch(`/gettimer?&id=${id}`)
     .then((res)=>{return res.json()})
     .then((data)=>{
-      const now = new Date().valueOf();
-      let time = 0;
       if(data.length === 0) {
         // prevent error if it does not exist
         window.location = '/';
         return;
       }
+      const now = new Date().valueOf();
+      let time = 0;
       time = parseInt(((new Date(data[0].expiration).valueOf() - now)/1000),10);
       document.title = data[0].name === '' ? 'Timer' : `${data[0].name}'s Timer`;
 

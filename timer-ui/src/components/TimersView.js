@@ -20,6 +20,23 @@ class TimerBox extends Component {
         textAlign: 'center',
         cursor: 'pointer',
       },
+      info: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      },
+      title: {
+        fontSize: '1.2rem',
+        fontWeight: '600',
+        width: '100%',
+        marginBottom: '7px',
+      },
+      time: {
+        minWidth: '40%',
+        display: 'flex',
+        flexDirection: 'column',
+        // borderLeft: '1px solid white',
+      },
       backgroundcolor: {
         position: 'absolute',
         width: '100%',
@@ -44,19 +61,19 @@ class TimerBox extends Component {
     // TODO remove the division by having if statements?!?!?
     let total = this.props.expiration;
     const days = Math.trunc(total / 86400);
-    const dayDiv = days > 0 ? (<div>{days} days</div>) : '';
+    const dayDiv = days > 0 ? (<div style={style.time}>{days} <div>days</div></div>) : '';
     total = total - (days*86400);
     const hours = Math.trunc(total / 3600);
-    const hoursDiv = hours > 0 ? (<div>{hours} hrs</div>) : '';
+    const hoursDiv = hours > 0 ? (<div style={style.time}>{hours} <div>hrs</div></div>) : '';
     total = total - (hours * 3600);
     const minutes = Math.trunc(total / 60);
-    const minDiv = minutes > 0 ? (<div>{minutes} mins</div>) : '';
+    const minDiv = minutes > 0 ? (<div style={style.time}>{minutes} <div>mins</div></div>) : '';
     const seconds = Math.trunc(total - (minutes * 60));
-    const secDiv = (<div>{seconds} secs</div>);
+    const secDiv = (<div style={style.time}>{seconds}<div>secs</div></div>);
     return(
       <div style={style.box} className='TimerBox' onClick={this.handleClick.bind(this)}>
-        <div>
-          <div>{this.props.name}</div>
+        <div style={style.info}>
+          <div style={style.title}>{this.props.name}</div>
           {secDiv}
           {minDiv}
           {hoursDiv}
