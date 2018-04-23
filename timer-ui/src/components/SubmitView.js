@@ -14,6 +14,7 @@ export default class SubmitView extends Component {
       date: moment(),
       time: moment(),
       color: '#345678',
+      shake: '',
       inputCheck: {
         name: true,
         date: true,
@@ -23,6 +24,7 @@ export default class SubmitView extends Component {
     }
     this.onChangeInput = this.onChangeInput.bind(this);
     this.submitform = this.submitform.bind(this);
+    this.shake = this.shake.bind(this);
     // functions to check inputs
     this.checker = {
       name: (v) => { return true },
@@ -69,6 +71,7 @@ export default class SubmitView extends Component {
     }
     this.setState({ inputCheck: inputCheck });
     if (hasError > 0){
+      this.shake()
       return false;
     }
     const hour = this.state.time._d.getHours();
@@ -93,6 +96,11 @@ export default class SubmitView extends Component {
       }
       window.location = '/success';
     });
+  }
+
+  shake() {
+    this.setState({shake: 'shake'})
+    setTimeout(()=> {this.setState({shake: ''})}, 200)
   }
 
   render() {
@@ -143,7 +151,7 @@ export default class SubmitView extends Component {
     }
     return(
       <div style={style.wrapper}>
-        <div style={style.formBox} className='FormBox'>
+        <div style={style.formBox} className={'FormBox ' + this.state.shake}>
           <div style={style.title}>Submit A New Timer</div>
           <div style={style.line}/>
           <div style={style.form}>
